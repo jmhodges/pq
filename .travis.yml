@@ -26,7 +26,7 @@ before_install:
   - ./.travis.sh postgresql_install
   - ./.travis.sh postgresql_configure
   - ./.travis.sh client_configure
-  - if [[ GIMME_GO_VERSION != "1.4"]]; then go get golang.org/x/tools/cmd/goimports; fi
+  - [[ ${GIMME_GO_VERSION} != "1.4"]] && go get golang.org/x/tools/cmd/goimports
 
 before_script:
   - createdb pqgotest
@@ -34,8 +34,8 @@ before_script:
   - createuser -DRS pqgosslcert
 
 script:
-  - if [[ GIMME_GO_VERSION != "1.4" ]]; then >
-    goimports -d -e $(find -name '*.go') | awk '{ print } END { exit NR == 0 ? 0 : 1 }'); fi
+  - [[ ${GIMME_GO_VERSION} != "1.4" ]] && \
+  goimports -d -e $(find -name '*.go') | awk '{ print } END { exit NR == 0 ? 0 : 1 }'
   - go vet ./...
   - PQTEST_BINARY_PARAMETERS=no  go test -v ./...
   - PQTEST_BINARY_PARAMETERS=yes go test -v ./...
