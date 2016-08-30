@@ -28,7 +28,7 @@ before_install:
   - ./.travis.sh postgresql_install
   - ./.travis.sh postgresql_configure
   - ./.travis.sh client_configure
-  - go get -tags '!gc' golang.org/x/tools/cmd/goimports # workaround 1.4's lack of runtime/trace
+  - go get -u golang.org/x/tools/cmd/goimports # workaround 1.4's lack of runtime/trace
 
 before_script:
   - createdb pqgotest
