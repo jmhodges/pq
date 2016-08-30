@@ -23,12 +23,12 @@ env:
     - PGVERSION=9.0
 
 before_install:
+  - go get -u golang.org/x/tools/cmd/goimports # workaround 1.4's lack of runtime/trace
   - ./.travis.sh postgresql_uninstall
   - ./.travis.sh pgdg_repository
   - ./.travis.sh postgresql_install
   - ./.travis.sh postgresql_configure
   - ./.travis.sh client_configure
-  - go get -u golang.org/x/tools/cmd/goimports # workaround 1.4's lack of runtime/trace
 
 before_script:
   - createdb pqgotest
